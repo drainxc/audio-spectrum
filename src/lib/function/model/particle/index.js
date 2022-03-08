@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
+import { getRandomIntInclusive } from "../../random";
 
 export function ParticleGroup() {
   const particleMesh = useRef(null);
@@ -33,9 +34,3 @@ function Fregment() {
     </mesh>
   );
 }
-
-function getRandomIntInclusive(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-} // 랜덤
