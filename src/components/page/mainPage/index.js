@@ -41,23 +41,42 @@ export default function MainPage() {
     const frameMesh = useRef(null);
     useFrame(() => {
       frameMesh.current.rotation.y = frameMesh.current.rotation.z += 0.007; // frameMesh 애니메이션
-      if (spectrum) {
-        analyser.getByteFrequencyData(dataArray);
-        let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
-        let lowerMax = max(lowerHalfArray);
-        let lowerMaxFr = (lowerMax / lowerHalfArray.length) ** 5;
-
-        frameMesh.current.scale.x = lowerMaxFr * 0.003 + 0.7;
-        frameMesh.current.scale.y = lowerMaxFr * 0.003 + 0.7;
-        frameMesh.current.scale.z = lowerMaxFr * 0.003 + 0.7;
-        // 음향에 맞추어 scale 변화
-      } // audio가 삽입됬을 시 if 문 실행
+      animation(frameMesh, 0.7);
     });
     return (
       <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]}>
         <FrameMesh />
       </mesh>
     );
+  }
+
+  function CircleMeshTentativeName() {
+    const circleMesh = useRef();
+
+    useFrame(() => {
+      circleMesh.current.rotation.x += 0.002;
+      circleMesh.current.rotation.y += 0.004;
+      animation(circleMesh, 1);
+    });
+    return (
+      <mesh ref={circleMesh} scale={[1, 1, 1]}>
+        <CircleMesh />
+      </mesh>
+    );
+  }
+
+  function animation(mesh, scale) {
+    if (spectrum) {
+      analyser.getByteFrequencyData(dataArray);
+      let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
+      let lowerMax = max(lowerHalfArray);
+      let lowerMaxFr = (lowerMax / lowerHalfArray.length) ** 5;
+
+      mesh.current.scale.x = lowerMaxFr * 0.007 + scale;
+      mesh.current.scale.y = lowerMaxFr * 0.007 + scale;
+      mesh.current.scale.z = lowerMaxFr * 0.007 + scale;
+      // 음향에 맞추어 scale 변화
+    } // audio가 삽입됬을 시 if 문 실행
   }
 
   return (
@@ -86,7 +105,7 @@ export default function MainPage() {
           }}
         >
           <ParticleGroup />
-          <CircleMesh />
+          <CircleMeshTentativeName />
           <FreamMeshTentativeName />
           <DirectionalLight color="#ffdb62" position={[1, 0, 0]} />
           <DirectionalLight color="#f8f0d7" position={[0.75, 1, 0.5]} />
