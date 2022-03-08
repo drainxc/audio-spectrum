@@ -83,15 +83,15 @@ export default function MainPage() {
     <>
       <S.MainDiv>
         <label for="thefile" ref={fileLabel}>
-          Choose an audio file
           <input
+            id="thefile"
             type="file"
             accept="audio/*"
             ref={thefile}
             onChange={(e) => hangleInputChange(e)}
           />
+          Choose an audio file
         </label>
-        <audio controls ref={audio}></audio>
 
         <Canvas
           linear
@@ -112,6 +112,7 @@ export default function MainPage() {
           <DirectionalLight color="#6a3c00" position={[-0.75, -1, 0.5]} />
           <AmbientLight />
         </Canvas>
+        <audio controls ref={audio}></audio>
       </S.MainDiv>
     </>
   );
