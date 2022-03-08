@@ -11,7 +11,6 @@ import { ParticleGroup } from "../../lib/function/model/particle";
 import { max } from "../../lib/function/max";
 
 export default function MainPage() {
-  const noise = new SimplexNoise();
   const thefile = useRef();
   const audio = useRef();
   const fileLabel = useRef();
@@ -23,7 +22,7 @@ export default function MainPage() {
     audio.current.load();
     audio.current.play();
     play();
-  }
+  } // audio 파일을 넣어주었을 때
 
   let dataArray;
   let analyser;
@@ -38,12 +37,12 @@ export default function MainPage() {
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
     spectrum = true;
-  }
+  } // 음향 감지
 
   function FreamMeshTentativeName() {
     const frameMesh = useRef(null);
     useFrame(() => {
-      frameMesh.current.rotation.y = frameMesh.current.rotation.z += 0.007;
+      frameMesh.current.rotation.y = frameMesh.current.rotation.z += 0.007; // frameMesh 애니메이션
       if (spectrum) {
         analyser.getByteFrequencyData(dataArray);
         let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
@@ -53,7 +52,8 @@ export default function MainPage() {
         frameMesh.current.scale.x = lowerMaxFr * 0.003 + 0.7;
         frameMesh.current.scale.y = lowerMaxFr * 0.003 + 0.7;
         frameMesh.current.scale.z = lowerMaxFr * 0.003 + 0.7;
-      }
+        // 음향에 맞추어 scale 변화
+      } // audio가 삽입됬을 시 if 문 실행
     });
     return (
       <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]}>
