@@ -11,7 +11,6 @@ import { ParticleGroup } from "../../lib/function/model/particle";
 
 export default function MainPage() {
   const noise = new SimplexNoise();
-  console.log(noise);
   const thefile = useRef();
   const audio = useRef();
   const fileLabel = useRef();
