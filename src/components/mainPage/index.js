@@ -8,6 +8,7 @@ import AmbientLight from "../../lib/function/light/ambientLight";
 import DirectionalLight from "../../lib/function/light/directionalLight";
 import SimplexNoise from "simplex-noise";
 import { ParticleGroup } from "../../lib/function/model/particle";
+import { max } from "../../lib/function/max";
 
 export default function MainPage() {
   const noise = new SimplexNoise();
@@ -37,12 +38,6 @@ export default function MainPage() {
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
     spectrum = true;
-  }
-
-  function max(arr) {
-    return arr.reduce(function (a, b) {
-      return Math.max(a, b);
-    });
   }
 
   function FreamMeshTentativeName() {
