@@ -54,18 +54,26 @@ export default function MainPage() {
         let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
         let lowerMax = max(lowerHalfArray);
         let lowerMaxFr = lowerMax / lowerHalfArray.length;
-        frameMesh.current.scale.x = lowerMaxFr * 0.05 + 0.7;
-        frameMesh.current.scale.y = lowerMaxFr * 0.05 + 0.7;
-        frameMesh.current.scale.z = lowerMaxFr * 0.05 + 0.7;
+        lowerMaxFr *= lowerMaxFr * lowerMaxFr * lowerMaxFr * lowerMaxFr;
+
+        frameMesh.current.scale.x = lowerMaxFr * 0.003 + 0.7;
+        frameMesh.current.scale.y = lowerMaxFr * 0.003 + 0.7;
+        frameMesh.current.scale.z = lowerMaxFr * 0.003 + 0.7;
       }
     });
-
     return (
       <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]}>
-        <FrameMesh/>
+        <FrameMesh />
       </mesh>
     );
   }
+
+  function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  } // 랜덤
+
   return (
     <>
       <S.MainDiv>
@@ -94,8 +102,6 @@ export default function MainPage() {
           {/* <PlaneMesh position={[-14, 0, 0]} args={[8, 80, 2, 20]} />
         <PlaneMesh position={[0, 0, 0]} args={[20, 80, 5, 10]} />
         <PlaneMesh position={[14, 0, 0]} args={[8, 80, 2, 20]} /> */}
-          {/* <CircleMesh />
-          <FrameMesh /> */}
           <CircleMesh />
           <FreamMeshTentativeName />
           <DirectionalLight color="#ffdb62" position={[1, 0, 0]} />
