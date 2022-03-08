@@ -2,13 +2,14 @@ import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as S from "./styles";
 // import PlaneMesh from "../../lib/function/model/plane";
-import AmbientLight from "../../../lib/function/light/ambientLight";
-import DirectionalLight from "../../../lib/function/light/directionalLight";
+// import AmbientLight from "../../../lib/function/light/ambientLight";
 
 import { max } from "../../../lib/function/max";
 import CircleMesh from "../../common/model/circle";
 import FrameMesh from "../../common/model/frame";
 import { ParticleGroup } from "../../common/model/particle";
+import DirectionalLight from "../../common/light/directionalLight";
+import AmbientLight from "../../common/light/ambientLight";
 
 export default function MainPage() {
   const thefile = useRef();
