@@ -1,5 +1,4 @@
-import { useFrame } from "@react-three/fiber";
-import React, { useRef } from "react";
+import React from "react";
 
 export default function FrameMesh() {
   return (
@@ -7,5 +6,5 @@ export default function FrameMesh() {
       <icosahedronGeometry args={[15, 1]} />
       <meshLambertMaterial attach="material" color="#ffffff" wireframe={true} />
     </>
-  );
+  ); // frameMesh 생성
 }

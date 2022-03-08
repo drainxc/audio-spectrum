@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as S from "./styles";
 // import PlaneMesh from "../../lib/function/model/plane";
-// import AmbientLight from "../../../lib/function/light/ambientLight";
-
 import { max } from "../../../lib/function/max";
 import CircleMesh from "../../common/model/circle";
 import FrameMesh from "../../common/model/frame";
@@ -16,6 +14,8 @@ export default function MainPage() {
   const audio = useRef();
   const fileLabel = useRef();
   let spectrum = false;
+  let dataArray;
+  let analyser;
 
   function hangleInputChange(e) {
     let files = e.target.files;
@@ -24,9 +24,6 @@ export default function MainPage() {
     audio.current.play();
     play();
   } // audio 파일을 넣어주었을 때
-
-  let dataArray;
-  let analyser;
 
   function play() {
     let context = new AudioContext();
