@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { getRandomIntInclusive } from "../../random";
+import { getRandomIntInclusive } from "../../../../lib/function/random";
 
 export function ParticleGroup() {
   const particleMesh = useRef(null);
