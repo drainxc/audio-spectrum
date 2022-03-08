@@ -14,7 +14,6 @@ export default function MainPage() {
   const thefile = useRef();
   const audio = useRef();
   const fileLabel = useRef();
-  const frameMesh = useRef(null);
   let spectrum = false;
 
   function hangleInputChange(e) {
@@ -47,14 +46,14 @@ export default function MainPage() {
   }
 
   function FreamMeshTentativeName() {
+    const frameMesh = useRef(null);
     useFrame(() => {
       frameMesh.current.rotation.y = frameMesh.current.rotation.z += 0.007;
       if (spectrum) {
         analyser.getByteFrequencyData(dataArray);
         let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
         let lowerMax = max(lowerHalfArray);
-        let lowerMaxFr = lowerMax / lowerHalfArray.length;
-        lowerMaxFr *= lowerMaxFr * lowerMaxFr * lowerMaxFr * lowerMaxFr;
+        let lowerMaxFr = (lowerMax / lowerHalfArray.length) ** 5;
 
         frameMesh.current.scale.x = lowerMaxFr * 0.003 + 0.7;
         frameMesh.current.scale.y = lowerMaxFr * 0.003 + 0.7;
@@ -64,6 +63,40 @@ export default function MainPage() {
     return (
       <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]}>
         <FrameMesh />
+      </mesh>
+    );
+  }
+
+  function ParticleGroup() {
+    const particleMesh = useRef(null);
+    useFrame(() => {
+      particleMesh.current.rotation.z =
+        particleMesh.current.rotation.y += 0.002;
+    });
+    return <group ref={particleMesh}>{Particles()}</group>;
+  }
+
+  function Particles() {
+    let result = [];
+    for (let i = 0; i < 125; i++) {
+      result.push(<Fregment />);
+    }
+    return result;
+  }
+
+  function Fregment() {
+    let scale = getRandomIntInclusive(5, 20) / 300;
+    return (
+      <mesh
+        position={[
+          getRandomIntInclusive(-30, 30),
+          getRandomIntInclusive(-30, 30),
+          getRandomIntInclusive(-30, 30),
+        ]}
+        scale={[scale, scale, scale]}
+      >
+        <tetrahedronGeometry args={[2, 0]} />
+        <meshPhongMaterial attach="material" color="white" />
       </mesh>
     );
   }
@@ -99,9 +132,7 @@ export default function MainPage() {
             position: [0, 5, 50],
           }}
         >
-          {/* <PlaneMesh position={[-14, 0, 0]} args={[8, 80, 2, 20]} />
-        <PlaneMesh position={[0, 0, 0]} args={[20, 80, 5, 10]} />
-        <PlaneMesh position={[14, 0, 0]} args={[8, 80, 2, 20]} /> */}
+          <ParticleGroup />
           <CircleMesh />
           <FreamMeshTentativeName />
           <DirectionalLight color="#ffdb62" position={[1, 0, 0]} />
