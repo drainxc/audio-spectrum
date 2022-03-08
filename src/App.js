@@ -4,7 +4,7 @@ import GlobalStyle from "./styles/styles";
 function App() {
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle firstColor="#ee9ca7" lastColor="#ffdde1"/>
       <MainPage />
     </>
   );
