@@ -6,6 +6,6 @@ export default function DirectionalLight(props) {
         color={props.color}
         position={props.position}
       />
-    </>
+    </> // 방향 조명 생성
   );
 }
