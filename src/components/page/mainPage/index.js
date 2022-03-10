@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as S from "./styles";
 // import PlaneMesh from "../../lib/function/model/plane";
@@ -8,12 +8,16 @@ import FrameMesh from "../../common/model/frame";
 import { ParticleGroup } from "../../common/model/particle";
 import DirectionalLight from "../../common/light/directionalLight";
 import AmbientLight from "../../common/light/ambientLight";
+// import defaultMusic from "../../../asset/audio/Green Greens.mp3";
+import { meshColor } from "../../../lib/export/data";
+import { getRandomIntInclusive } from "../../../lib/function/random";
 
 export default function MainPage() {
   const thefile = useRef();
   const audio = useRef();
   const fileLabel = useRef();
   let spectrum = false;
+  const colorNumber = getRandomIntInclusive(0, meshColor.length - 1);
   let dataArray;
   let analyser;
 
@@ -34,7 +38,7 @@ export default function MainPage() {
     analyser.fftSize = 512;
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
-    spectrum = true;
+    spectrum = true
   } // 음향 감지
 
   function FreamMeshTentativeName() {
@@ -79,6 +83,8 @@ export default function MainPage() {
     } // audio가 삽입됬을 시 if 문 실행
   }
 
+  console.log(meshColor[colorNumber]);
+
   return (
     <>
       <S.MainDiv>
@@ -92,7 +98,6 @@ export default function MainPage() {
           />
           Choose an audio file
         </label>
-
         <Canvas
           linear
           flat
@@ -107,10 +112,10 @@ export default function MainPage() {
           <ParticleGroup />
           <CircleMeshTentativeName />
           <FreamMeshTentativeName />
-          <DirectionalLight color="#ffdb62" position={[1, 0, 0]} />
-          <DirectionalLight color="#f8f0d7" position={[0.75, 1, 0.5]} />
-          <DirectionalLight color="#6a3c00" position={[-0.75, -1, 0.5]} />
-          <AmbientLight />
+          <DirectionalLight color="ffffff" position={[1, 0, 0]} />
+          <DirectionalLight color={meshColor[colorNumber][0]} position={[0.75, 1, 0.5]} />
+          <DirectionalLight color={meshColor[colorNumber][1]} position={[-0.75, -1, 0.5]} />
+          <AmbientLight color={meshColor[colorNumber][2]} />
         </Canvas>
         <audio controls ref={audio}></audio>
       </S.MainDiv>

@@ -1,3 +1,3 @@
-export default function AmbientLight() {
-  return <ambientLight intensity={1} color={0xff9e27} />;
+export default function AmbientLight(color) {
+  return <ambientLight intensity={1} color={color.color} />;
 } //환경광 생성
