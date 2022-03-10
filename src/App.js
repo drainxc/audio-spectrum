@@ -1,13 +1,13 @@
 import MainPage from "./components/page/mainPage";
 import GlobalStyle from "./styles/styles";
-import { color } from "./lib/export/data";
+import { bgColor } from "./lib/export/data";
 import { getRandomIntInclusive } from "./lib/function/random";
 
 function App() {
-  const colorNumber = getRandomIntInclusive(0, color.length - 1);
+  const colorNumber = getRandomIntInclusive(0, bgColor.length - 1);
   return (
     <>
-      <GlobalStyle firstColor={color[colorNumber][0]} lastColor={color[colorNumber][1]} />
+      <GlobalStyle firstColor={bgColor[colorNumber][0]} lastColor={bgColor[colorNumber][1]} />
       <MainPage />
     </>
   );
