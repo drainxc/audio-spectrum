@@ -8,7 +8,6 @@ import FrameMesh from "../../common/model/frame";
 import { ParticleGroup } from "../../common/model/particle";
 import DirectionalLight from "../../common/light/directionalLight";
 import AmbientLight from "../../common/light/ambientLight";
-// import defaultMusic from "../../../asset/audio/Green Greens.mp3";
 import { meshColor } from "../../../lib/export/data";
 import { getRandomIntInclusive } from "../../../lib/function/random";
 
