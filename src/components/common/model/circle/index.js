@@ -1,4 +1,3 @@
-import { useFrame } from "@react-three/fiber";
 import React from "react";
 
 export default function CircleMesh() {

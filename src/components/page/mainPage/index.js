@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as S from "./styles";
 // import PlaneMesh from "../../lib/function/model/plane";
