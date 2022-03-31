@@ -36,7 +36,7 @@ export default function MainPage() {
     analyser.fftSize = 512;
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
-    spectrum = true
+    spectrum = true;
   } // 음향 감지
 
   function FreamMeshTentativeName() {
@@ -46,7 +46,7 @@ export default function MainPage() {
       animation(frameMesh, 0.7);
     });
     return (
-      <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]}>
+      <mesh ref={frameMesh} scale={[0.7, 0.7, 0.7]} position={[0, 4, 0]}>
         <FrameMesh />
       </mesh>
     );
@@ -61,7 +61,7 @@ export default function MainPage() {
       animation(circleMesh, 1);
     });
     return (
-      <mesh ref={circleMesh} scale={[1, 1, 1]}>
+      <mesh ref={circleMesh} scale={[1, 1, 1]} position={[0, 4, 0]}>
         <CircleMesh />
       </mesh>
     );
@@ -111,8 +111,14 @@ export default function MainPage() {
           <CircleMeshTentativeName />
           <FreamMeshTentativeName />
           <DirectionalLight color="ffffff" position={[1, 0, 0]} />
-          <DirectionalLight color={meshColor[colorNumber][0]} position={[0.75, 1, 0.5]} />
-          <DirectionalLight color={meshColor[colorNumber][1]} position={[-0.75, -1, 0.5]} />
+          <DirectionalLight
+            color={meshColor[colorNumber][0]}
+            position={[0.75, 1, 0.5]}
+          />
+          <DirectionalLight
+            color={meshColor[colorNumber][1]}
+            position={[-0.75, -1, 0.5]}
+          />
           <AmbientLight color={meshColor[colorNumber][2]} />
         </Canvas>
         <audio controls ref={audio}></audio>
