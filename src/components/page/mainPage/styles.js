@@ -32,26 +32,28 @@ export const MainDiv = styled.div`
   }
 
   label {
-    display: inline-block;
-    left: 10%;
-    top: 8%;
-    transform: translate3d(10%, 50%, 0);
-    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2%;
+    margin-top: 2%;
+    width: 300px;
+    height: 75px;
     border-radius: 4px;
 
     background: black;
     color: white;
-    font-size: 1.25em;
+    font-size: 23px;
     font-weight: 700;
     box-shadow: 0 0px 60px black;
-    transition: all 0.1s ease;
+    transition: all 0.2s ease;
   }
 
   label:hover {
-    transform: translate3d(10%, 60%, 0);
+    transform: translate3d(0, 10%, 0);
   }
 
   label:active {
-    transform: translate3d(10%, 45%, 0);
+    transform: translate3d(0, 20%, 0);
   }
 `;

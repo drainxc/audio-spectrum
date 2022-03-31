@@ -14,7 +14,6 @@ import { getRandomIntInclusive } from "../../../lib/function/random";
 export default function MainPage() {
   const thefile = useRef();
   const audio = useRef();
-  const fileLabel = useRef();
   let spectrum = false;
   const colorNumber = getRandomIntInclusive(0, meshColor.length - 1);
   let dataArray;
@@ -87,7 +86,7 @@ export default function MainPage() {
   return (
     <>
       <S.MainDiv>
-        <label for="thefile" ref={fileLabel}>
+        <label for="thefile">
           <input
             id="thefile"
             type="file"

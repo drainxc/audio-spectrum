@@ -7,7 +7,10 @@ function App() {
   const colorNumber = getRandomIntInclusive(0, bgColor.length - 1);
   return (
     <>
-      <GlobalStyle firstColor={bgColor[colorNumber][0]} lastColor={bgColor[colorNumber][1]} />
+      <GlobalStyle
+        firstColor={bgColor[colorNumber][0]}
+        lastColor={bgColor[colorNumber][1]}
+      />
       <MainPage />
     </>
   );
