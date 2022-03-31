@@ -81,8 +81,6 @@ export default function MainPage() {
     } // audio가 삽입됬을 시 if 문 실행
   }
 
-  console.log(meshColor[colorNumber]);
-
   return (
     <>
       <S.MainDiv>
