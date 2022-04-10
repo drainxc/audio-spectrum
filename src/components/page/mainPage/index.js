@@ -10,6 +10,7 @@ import DirectionalLight from "../../common/light/directionalLight";
 import AmbientLight from "../../common/light/ambientLight";
 import { meshColor } from "../../../lib/export/data";
 import { getRandomIntInclusive } from "../../../lib/function/random";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export default function MainPage() {
   const thefile = useRef();
@@ -79,6 +80,20 @@ export default function MainPage() {
       mesh.current.scale.z = lowerMaxFr * 0.007 + scale;
       // 음향에 맞추어 scale 변화
     } // audio가 삽입됬을 시 if 문 실행
+  }
+
+  glftLoader();
+
+  function glftLoader() {
+    const gltfLoader = new GLTFLoader();
+    const url = "scene.gltf"; // gltf가 있는 장소
+    gltfLoader.load(url, (gltf) => {
+      console.log(gltf);
+      const root = gltf.scene;
+
+      const star = root.getObjectByName("GLTF_SceneRootNode");
+      console.log(star);
+    });
   }
 
   return (
