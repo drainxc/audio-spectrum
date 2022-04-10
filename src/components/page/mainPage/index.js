@@ -90,10 +90,27 @@ export default function MainPage() {
     gltfLoader.load(url, (gltf) => {
       console.log(gltf);
       const root = gltf.scene;
+      console.log(dumpObject(root).join("\n")); // gltf의 자식
 
       const star = root.getObjectByName("GLTF_SceneRootNode");
       console.log(star);
     });
+  }
+
+  function dumpObject(obj, lines = [], isLast = true, prefix = "") {
+    const localPrefix = isLast ? "└─" : "├─";
+    lines.push(
+      `${prefix}${prefix ? localPrefix : ""}${obj.name || "*no-name*"} [${
+        obj.type
+      }]`
+    );
+    const newPrefix = prefix + (isLast ? "  " : "│ ");
+    const lastNdx = obj.children.length - 1;
+    obj.children.forEach((child, ndx) => {
+      const isLast = ndx === lastNdx;
+      dumpObject(child, lines, isLast, newPrefix);
+    });
+    return lines;
   }
 
   return (
