@@ -12,9 +12,9 @@ export function ParticleGroup() {
 
 function Particles() {
   let result = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < 500; i++) {
     result.push(<Fregment />);
-  } // 125개의 fregent를 배열에 삽입
+  } // fregent를 배열에 삽입
   return result;
 }
 
