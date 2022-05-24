@@ -15,10 +15,10 @@ export const MainDiv = styled.div`
   }
 
   input {
-    opacity: 0;
-    overflow: hidden;
     position: absolute;
     z-index: 1;
+    opacity: 0;
+    overflow: hidden;
   }
 
   label {
@@ -31,12 +31,13 @@ export const MainDiv = styled.div`
     height: 75px;
     border-radius: 4px;
 
-    background: black;
-    color: white;
-    font-size: 23px;
-    font-weight: 700;
-    box-shadow: 0 0px 60px black;
+    background: #fff;
+    color: #000;
+    font-size: 25px;
+    font-weight: 900;
+    box-shadow: 0 0px 10px #fff;
     transition: all 0.2s ease;
+    z-index: 0;
   }
 
   label:hover {

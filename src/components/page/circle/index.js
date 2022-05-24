@@ -10,11 +10,10 @@ import DirectionalLight from "../../common/light/directionalLight";
 import AmbientLight from "../../common/light/ambientLight";
 import { meshColor } from "../../../lib/export/data";
 import { getRandomIntInclusive } from "../../../lib/function/random";
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
-export default function MainPage() {
-  const thefile = useRef();
-  const audio = useRef();
+export default function Circle() {
+  const circleFile = useRef();
+  const circleAudio = useRef();
   let spectrum = false;
   const colorNumber = getRandomIntInclusive(0, meshColor.length - 1);
   let dataArray;
@@ -22,22 +21,22 @@ export default function MainPage() {
 
   function hangleInputChange(e) {
     let files = e.target.files;
-    audio.current.src = URL.createObjectURL(files[0]);
-    audio.current.load();
-    audio.current.play();
+    circleAudio.current.src = URL.createObjectURL(files[0]);
+    circleAudio.current.load();
+    circleAudio.current.play();
     play();
+    spectrum = true;
   } // audio 파일을 넣어주었을 때
 
   function play() {
     let context = new AudioContext();
-    let src = context.createMediaElementSource(audio.current);
+    let src = context.createMediaElementSource(circleAudio.current);
     analyser = context.createAnalyser();
     src.connect(analyser);
     analyser.connect(context.destination);
     analyser.fftSize = 512;
     let bufferLength = analyser.frequencyBinCount;
     dataArray = new Uint8Array(bufferLength);
-    spectrum = true;
   } // 음향 감지
 
   function FreamMeshTentativeName() {
@@ -82,50 +81,17 @@ export default function MainPage() {
     } // audio가 삽입됬을 시 if 문 실행
   }
 
-  glftLoader();
-
-  function glftLoader() {
-    const gltfLoader = new GLTFLoader();
-    const url = "scene.gltf"; // gltf가 있는 장소
-    gltfLoader.load(url, (gltf) => {
-      console.log(gltf);
-      const root = gltf.scene;
-      console.log(dumpObject(root).join("\n")); // gltf의 자식
-
-      const star = root.getObjectByName("GLTF_SceneRootNode");
-      console.log(star);
-    });
-  }
-
-  function dumpObject(obj, lines = [], isLast = true, prefix = "") {
-    const localPrefix = isLast ? "└─" : "├─";
-    lines.push(
-      `${prefix}${prefix ? localPrefix : ""}${obj.name || "*no-name*"} [${
-        obj.type
-      }]`
-    );
-    const newPrefix = prefix + (isLast ? "  " : "│ ");
-    const lastNdx = obj.children.length - 1;
-    obj.children.forEach((child, ndx) => {
-      const isLast = ndx === lastNdx;
-      dumpObject(child, lines, isLast, newPrefix);
-    });
-    return lines;
-  }
-
   return (
     <>
       <S.MainDiv>
-        <label for="thefile">
-          <input
-            id="thefile"
-            type="file"
-            accept="audio/*"
-            ref={thefile}
-            onChange={(e) => hangleInputChange(e)}
-          />
-          Choose an audio file
-        </label>
+        <label for="thefile">Choose an audio file</label>
+        <input
+          id="thefile"
+          type="file"
+          accept="audio/*"
+          ref={circleFile}
+          onChange={(e) => hangleInputChange(e)}
+        />
         <Canvas
           linear
           flat
@@ -151,7 +117,7 @@ export default function MainPage() {
           />
           <AmbientLight color={meshColor[colorNumber][2]} />
         </Canvas>
-        <audio controls ref={audio}></audio>
+        <audio controls ref={circleAudio}></audio>
       </S.MainDiv>
     </>
   );
