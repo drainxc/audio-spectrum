@@ -2,10 +2,6 @@ import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
-:root{
-  --firstColor : ${(props) => props.firstColor};
-  --lastColor : ${(props) => props.lastColor};
-}
   ${reset};
   body {
     -webkit-user-select: none;
@@ -17,11 +13,18 @@ const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    background: -webkit-linear-gradient(
-        top,
-        var(--firstColor) 0%,
-        var(--lastColor) 100%
-    );
+    background-color: #000;
+
+    .dg.main.a {
+      display: none;
+
+      ul {
+        margin-top: 20px;
+      }
+    }
+    .dg.main.a:last-child {
+      display: flex;
+    }
   }
 `;
 
