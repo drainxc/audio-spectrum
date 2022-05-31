@@ -2,17 +2,16 @@ import React, { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { getRandomIntInclusive } from "../../../../lib/function/random";
 
-export function ParticleGroup() {
+export function ParticleGroup(props) {
   const particleMesh = useRef(null);
   useFrame(() => {
-    particleMesh.current.rotation.z = particleMesh.current.rotation.y += 0.002;
+    particleMesh.current.rotation.z = particleMesh.current.rotation.y += props.rotation;
   }); // 모든 파티클의 애니메이션
-  return <group ref={particleMesh}>{Particles()}</group>; // 파티클을 그룹으로 만들어 생성
+  return <group ref={particleMesh}>{Particles(props.number)}</group>; // 파티클을 그룹으로 만들어 생성
 }
-
-function Particles() {
+function Particles(number) {
   let result = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < number; i++) {
     result.push(<Fregment />);
   } // fregent를 배열에 삽입
   return result;

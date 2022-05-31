@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function CircleMesh() {
+export default function CircleMesh(props) {
   return (
     <>
-      <icosahedronBufferGeometry args={[7, 1]} />
+      <icosahedronBufferGeometry args={[7, props.detail]} />
       <meshPhongMaterial
         attach="material"
         color="white"
