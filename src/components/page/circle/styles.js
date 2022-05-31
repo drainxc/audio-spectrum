@@ -10,7 +10,7 @@ export const MainDiv = styled.div`
   audio {
     position: fixed;
     left: 10px;
-    bottom: -10px;
+    bottom: 0;
     width: calc(100% - 20px);
   }
 
@@ -19,6 +19,15 @@ export const MainDiv = styled.div`
     z-index: 1;
     opacity: 0;
     overflow: hidden;
+  }
+
+  canvas {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
   }
 
   label {
@@ -47,4 +56,10 @@ export const MainDiv = styled.div`
   label:active {
     transform: translate3d(0, 20%, 0);
   }
+`;
+
+export const Dat = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
 `;
