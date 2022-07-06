@@ -9,8 +9,8 @@ export function setGui(data, setData) {
       this.circleScale = data.circleScale;
       this.circleRotation = data.circleRotation;
       this.circleDetail = data.circleDetail;
-      this.dataBoolean = data.dataBoolean;
       this.mainColor = data.mainColor;
+      this.intensity = data.intensity;
       this.particleNumber = data.particleNumber;
       this.particleRotation = data.particleRotation;
     }
@@ -63,13 +63,16 @@ export function setGui(data, setData) {
     });
   gui
     .add(myData, "particleRotation", 0, 0.01)
-    .step(0.01)
+    .step(0.001)
     .onFinishChange(function(value) {
       setGuiData(value, "particleRotation");
     });
-  gui.add(myData, "dataBoolean").onChange(function(value) {
-    setGuiData(value, "dataBoolean");
-  });
+  gui
+    .add(myData, "intensity", 0, 1)
+    .step(0.1)
+    .onFinishChange(function(value) {
+      setGuiData(value, "intensity");
+    });
   gui.addColor(myData, "mainColor").onFinishChange(function(value) {
     setGuiData(value, "mainColor");
   });
