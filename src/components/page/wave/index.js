@@ -64,19 +64,13 @@ export default function Wave() {
         ctx.beginPath();
         ctx.moveTo(0, canvas.height / 2);
         for (let i = 0; i < canvas.width; i += 1) {
-          ctx.lineTo(
-            i,
-            canvas.height / 2 +
-              Math.sin(i * 0.007 + increment) *
-                (dataArray[i/ 5] * 1.5) *
-                Math.sin(increment)
-          );
+          ctx.lineTo(i, canvas.height / 2 + dataArray[i / 5] * -1);
         }
-        ctx.strokeStyle = `hsl(60,50%,50%)`;
-        ctx.lineWidth = 5; 
+        ctx.strokeStyle = `hsl(${60 + increment},50%,50%)`;
+        ctx.lineWidth = 5;
         ctx.stroke();
 
-        increment += 0.02;
+        increment += 2;
       }
     }
 
