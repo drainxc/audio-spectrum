@@ -5,12 +5,15 @@ import Wave from "../components/page/wave";
 
 export default function Router() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/bar" element={<Bar />} />
-        <Route path="/circle" element={<Circle />} />
-        <Route path="/wave" element={<Wave />} />
-      </Routes>
-    </BrowserRouter>
+    // <BrowserRouter>
+    //   <Routes>
+    //     <Route path="/bar" element={<Bar />} />
+    //     <Route path="/circle" element={<Circle />} />
+    //     <Route path="/wave" element={<Wave />} />
+    //   </Routes>
+    // </BrowserRouter>
+    <Circle />
+    // <Bar />
+    // <Wave />
   );
 }
