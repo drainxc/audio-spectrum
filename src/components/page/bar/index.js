@@ -49,11 +49,11 @@ export default function Bar() {
         analyser.getByteFrequencyData(dataArray);
 
         for (var i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i] * 2;
+          barHeight = dataArray[i] * 0.5;
 
-          var r = barHeight + 25 * (i / bufferLength);
+          var r = barHeight + 25;
           var g = 255;
-          var b = 3 * i;
+          var b = 3;
 
           ctx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
           ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
