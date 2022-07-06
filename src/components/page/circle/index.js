@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as S from "./styles";
-// import PlaneMesh from "../../lib/function/model/plane";
 import { max } from "../../../lib/function/max";
 import CircleMesh from "../../common/model/circle";
 import FrameMesh from "../../common/model/frame";
@@ -10,12 +9,34 @@ import DirectionalLight from "../../common/light/directionalLight";
 import AmbientLight from "../../common/light/ambientLight";
 import { meshColor } from "../../../lib/export/data";
 import { setGui } from "../../../lib/function/gui";
+import axios from "axios";
+import Swal from "sweetalert2";
+// import PlaneMesh from "../../lib/function/model/plane";
 
 export default function Circle() {
   const circleFile = useRef();
   const circleAudio = useRef();
+  const [urlState, setUrlState] = useState("");
   let dataArray = "";
   let analyser;
+
+  const changeInput = (e) => {
+    setUrlState(e.target.value);
+  };
+
+  async function save() {
+    const params = {
+      youtubeLink: urlState,
+    };
+
+    await axios({
+      url: "http://localhost:8081/downloadmp3",
+      method: "POST",
+      params: params,
+    }).then(() => {
+      Swal.fire("Save!", "Download Success!", "success");
+    });
+  }
 
   const [data, setData] = useState(
     () =>
@@ -28,7 +49,7 @@ export default function Circle() {
         circleDetail: 1,
         particleNumber: 500,
         particleRotation: 0.002,
-        dataBoolean: false,
+        intensity: 1,
         mainColor: meshColor[2],
       }
   );
@@ -38,17 +59,15 @@ export default function Circle() {
   const [load, setLoad] = useState(false);
 
   useEffect(() => {
-    console.log(data);
     window.localStorage.setItem("datum", JSON.stringify(data));
     if (load && circleAudio.current?.src !== "") {
       window.location.reload();
     }
     setLoad(true);
-  }, [data]);
+  }, [data, load]);
 
-  function hangleInputChange(e) {
-    let files = e.target.files;
-    circleAudio.current.src = URL.createObjectURL(files[0]);
+  function handleInputChange(e) {
+    circleAudio.current.src = URL.createObjectURL(e.target.files[0]);
     circleAudio.current.load();
     circleAudio.current.play();
     play();
@@ -122,14 +141,23 @@ export default function Circle() {
   return (
     <>
       <S.MainDiv>
-        <label for="thefile">Choose an audio file</label>
+        <label for="thefile" id="filelabel">
+          Choose an audio file
+        </label>
         <input
           id="thefile"
           type="file"
           accept="audio/*"
           ref={circleFile}
-          onChange={(e) => hangleInputChange(e)}
+          onChange={(e) => handleInputChange(e)}
         />
+        <S.UrlInput>
+          <input
+            onChange={(e) => changeInput(e)}
+            placeholder="Enter YouTube url!"
+          />
+          <button onClick={() => save()}>save</button>
+        </S.UrlInput>
         <Canvas
           linear
           flat
@@ -150,7 +178,7 @@ export default function Circle() {
           <DirectionalLight color="#ffffff" position={[1, 0, 0]} />
           <DirectionalLight color={meshColor[0]} position={[0.75, 1, 0.5]} />
           <DirectionalLight color={meshColor[1]} position={[-0.75, -1, 0.5]} />
-          <AmbientLight color={data.mainColor} />
+          <AmbientLight color={data.mainColor} intensity={data.intensity} />
         </Canvas>
         <audio controls ref={circleAudio}></audio>
       </S.MainDiv>
