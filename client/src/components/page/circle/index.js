@@ -127,13 +127,13 @@ export default function Circle() {
     // console.log(dataArray)
     if (dataArray !== "") {
       analyser.getByteFrequencyData(dataArray);
-      let lowerHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
-      let lowerMax = max(lowerHalfArray);
-      let lowerMaxFr = (lowerMax / lowerHalfArray.length) ** 5;
+      let higherHalfArray = dataArray.slice(0, dataArray.length / 2 - 1);
+      let higherMax = max(higherHalfArray);
+      let higherMaxFr = (higherMax / higherHalfArray.length) ** 5;
 
-      mesh.current.scale.x = lowerMaxFr * 0.01 + scale;
-      mesh.current.scale.y = lowerMaxFr * 0.01 + scale;
-      mesh.current.scale.z = lowerMaxFr * 0.01 + scale;
+      mesh.current.scale.x = higherMaxFr * 0.01 + scale;
+      mesh.current.scale.y = higherMaxFr * 0.01 + scale;
+      mesh.current.scale.z = higherMaxFr * 0.01 + scale;
       // 음향에 맞추어 scale 변화
     } // audio가 삽입됬을 시 if 문 실행
   }
